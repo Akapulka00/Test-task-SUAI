@@ -1,0 +1,72 @@
+/////////Проверка вывод гупп в которх состоял студент/////////////
+SELECT students.name, students.surname, students.patronymic, gruppa.group_number
+FROM students JOIN students_group
+ON students.ID=students_group.ID_students 
+JOIN gruppa
+ON gruppa.ID=students_group.ID_group
+WHERE students.ID=1;
+///////////////////Выборка всех заданий студента/////////////////////////////
+SELECT task.title, task.date FROM task JOIN students ON task.assigned_to_stu=students.ID 
+AND students.ID=1 LEFT JOIN students_group ON task.assigned_to_grou=students_group.ID_group 
+AND students_group.ID_students=1 
+UNION 
+SELECT task.title, task.date FROM group_lesson JOIN students_group ON group_lesson.ID_group= students_group.ID_group 
+AND students_group.ID_students=1 JOIN task ON task.assigned_to_lesson=group_lesson.ID_lesson;
+///#2
+SELECT task.title, task.date, stud_task.stat
+FROM task JOIN stud_task
+ON task.ID=stud_task.ID_task AND stud_task.ID_stud=2;
+////////// Выборка для проверяющего количества студентов для 1го задания с учётом привязки
+групп со студентами;////////////////
+SELECT   gruppa.group_number, COUNT(students_group.ID_group) AS grup_num
+FROM  stud_task
+ JOIN students_group
+ON students_group.ID_students=stud_task.ID_stud and stud_task.ID_task=3
+JOIN gruppa
+on students_group.ID_group=gruppa.ID
+ GROUP BY  gruppa.group_number;
+//////////////Выборка для задания списка групп и студентов//////////////////
+1)вывод списка групп для задания
+SELECT task.title, gruppa.group_number
+FROM `task` JOIN group_lesson
+ON (group_lesson.ID_lesson=task.assigned_to_lesson OR task.assigned_to_grou!=group_lesson.ID_group)AND task.ID=1
+JOIN gruppa
+ON gruppa.ID=group_lesson.ID_group
+WHERE 1
+2)вывод списка студентов по группам
+SELECT  gruppa.group_number, students.surname,students.name,students.patronymic
+FROM stud_task
+JOIN students
+ON stud_task.ID_task=2 and stud_task.ID_stud=students.ID
+JOIN students_group
+ON stud_task.ID_stud=students_group.ID_students
+JOIN gruppa
+ON gruppa.ID=students_group.ID_group
+
+////////////////////////Вывод списка студентов для конкретного занятия////////////////////////////////
+SELECT  DISTINCT students.name, students.surname, students.patronymic,stud_task.stat
+FROM stud_task
+JOIN students
+ON stud_task.ID_task=1 AND stud_task.ID_stud=students.ID
+/////////Расчёт нагрузки проверяющих: какое количество заданий необходимо проверить, в
+том числе совместные. Представить в убывающем порядке.////////////
+SELECT task.title,  SUM(stud_task.stat=0) AS stat,COUNT(stud_task.stat=0)AS summ
+FROM task_inspector
+JOIN stud_task
+on task_inspector.ID_task=stud_task.ID_task and task_inspector.ID_inspector=1
+JOIN task
+ON task.ID=task_inspector.ID_task
+GROUP BY task_inspector.ID_task
+///////////////Расчёт статистики "критически нагруженных" заданий: сколько студентов
+выполняет задание "делимое на" количество проверяющих это задание. Представить в
+убывающем порядке.//////////////////////
+SELECT table_1.ID,table_1.kt/table_1.sd as nagr
+FROM(SELECT  task.ID, COUNT( DISTINCT  task_inspector.ID_inspector) AS sd, COUNT(stud_task.ID_stud) AS kt
+FROM task_inspector
+JOIN task
+on task_inspector.ID_task=task.ID
+JOIN  stud_task
+ON stud_task.ID_task=task_inspector.ID_task
+GROUP BY  task.ID) as table_1
+
+

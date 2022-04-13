@@ -1,0 +1,15 @@
+{% extends 'parts/base.twig' %}
+{% block body %}
+    <h1>Выборка всех заданий студента </h1>
+    <form method="post"  name="idStudent"  action="/table1-post">
+        <div class=" form-group">
+            <label for="stud_ID">Номер студента</label>
+            <input type="number" name="stud_ID" class="form-control" id="stud_ID" >
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 table1Button" >Вывод таблицы</button>
+    </form>
+    <div class="tabble">
+
+    </div>
+    <script src="{{ '/asset/js/task1.js' }}">
+{% endblock %}

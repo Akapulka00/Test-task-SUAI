@@ -1,0 +1,17 @@
+{% extends 'parts/base.twig' %}
+{% block body %}
+    <h2>Выборка для проверяющего количества студентов для одного задания с учётом привязки
+        групп со студентами;
+    </h2>
+    <form method="post"  name="idtask"  action="/table2-post">
+        <div class=" form-group">
+            <label for="task_ID">Номер задания</label>
+            <input type="number" name="task_ID" class="form-control" id="task_ID" >
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 table1Button" >Вывод таблицы</button>
+    </form>
+    <div class="tabble">
+
+    </div>
+    <script src="{{ '/asset/js/task2.js' }}">
+{% endblock %}

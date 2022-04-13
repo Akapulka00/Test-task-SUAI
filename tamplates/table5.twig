@@ -1,0 +1,16 @@
+{% extends 'parts/base.twig' %}
+{% block body %}
+    <h3>Расчёт нагрузки проверяющих: какое количество заданий необходимо проверить, в
+        том числе совместные. </h3>
+    <form method="post"  name="nagr"  action="/table5-post">
+        <div class=" form-group">
+            <label for="inspector_ID">Id инспектора</label>
+            <input type="number" name="inspector_ID" class="form-control" id="inspector_ID" >
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 table1Button" >Вывод таблицы</button>
+    </form>
+    <div class="tabble">
+
+    </div>
+    <script src="{{ '/asset/js/task5.js' }}">
+{% endblock %}

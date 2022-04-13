@@ -1,0 +1,16 @@
+{% extends 'parts/base.twig' %}
+{% block body %}
+    <h1>Вывод списка студентов для конкретного занятия </h1>
+    <p>Тут должна быть форма</p>
+    <form method="post"  name="idstud"  action="/table4-post">
+        <div class=" form-group">
+            <label for="task_ID">Номер задания</label>
+            <input type="number" name="task_ID" class="form-control" id="task_ID" >
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 table1Button" >Вывод таблицы</button>
+    </form>
+    <div class="tabble">
+
+    </div>
+    <script src="{{ '/asset/js/task4.js' }}">
+{% endblock %}
