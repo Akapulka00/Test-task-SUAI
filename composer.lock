@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8c9f97ca6564dc4f86562fca21798e9",
+    "content-hash": "d28f303eda44dba3cf34f69830d5ae07",
     "packages": [
         {
             "name": "dogancelik/slim-json",

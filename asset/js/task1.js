@@ -8,7 +8,7 @@ document.forms.idStudent.addEventListener('submit', function (e) {
     })
         .then(response => response.json())
         .then(data => {
-
+                console.log("asdasd");
             if(data.length!=0) {
                 let tittle = document.createElement('h1');
                 tittle.innerText = "Задания студента"

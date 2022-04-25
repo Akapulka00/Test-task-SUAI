@@ -8,8 +8,6 @@ use  \Twig\Loader\FilesystemLoader;
 use \Twig\Environment;
 use \App\Database;
 
-
-
 require  __DIR__.'/vendor/autoload.php';
 
 $loader=new FilesystemLoader('tamplates');

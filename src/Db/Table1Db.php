@@ -1,8 +1,8 @@
 <?php
 
 
-namespace App;
-
+namespace App\Db;
+use App\Kernel\Database;
 
 use PDO;
 
@@ -22,9 +22,12 @@ class Table1Db
         join task
          on task.ID = stud_task.ID_task');
         $statement->execute([
-    'ID_USER'=>$data
+            'ID_USER'=>$data
         ]);
-        return $statement->fetchALL(PDO::FETCH_ASSOC);
+        $answer=$statement->fetchALL(PDO::FETCH_ASSOC);
+        $this->database->killPDO($this->database);
+        return $answer;
+
     }
     public function  getTable2( $data){
         $statement = $this->database->getConnection()->prepare('SELECT   gruppa.group_number, COUNT(students_group.ID_group) AS grup_num
@@ -37,7 +40,9 @@ class Table1Db
         $statement->execute([
             'ID_task'=>$data
         ]);
-        return $statement->fetchALL(PDO::FETCH_ASSOC);
+        $answer=$statement->fetchALL(PDO::FETCH_ASSOC);
+        $this->database->killPDO($this->database);
+        return $answer;
     }
     public function  getTable3( $data){
         $statement = $this->database->getConnection()->prepare('SELECT  gruppa.group_number, students.surname,students.name,students.patronymic
@@ -51,7 +56,9 @@ FROM stud_task
         $statement->execute([
             'ID_task'=>$data
         ]);
-        return $statement->fetchALL(PDO::FETCH_ASSOC);
+        $answer=$statement->fetchALL(PDO::FETCH_ASSOC);
+        $this->database->killPDO($this->database);
+        return $answer;
     }
     public function  getTable4( $data){
         $statement = $this->database->getConnection()->prepare('SELECT  DISTINCT students.name, students.surname, students.patronymic,stud_task.stat, g.group_number
@@ -64,7 +71,9 @@ join gruppa g on g.ID = students_group.ID_group');
         $statement->execute([
             'ID_task'=>$data
         ]);
-        return $statement->fetchALL(PDO::FETCH_ASSOC);
+        $answer=$statement->fetchALL(PDO::FETCH_ASSOC);
+        $this->database->killPDO($this->database);
+        return $answer;
     }
     public function  getTable5( $data){
         $statement = $this->database->getConnection()->prepare('SELECT task.title,  SUM(stud_task.stat=0) AS stat,COUNT(stud_task.stat=0)AS summ
@@ -77,7 +86,9 @@ GROUP BY task_inspector.ID_task');
         $statement->execute([
             'ID_insp'=>$data
         ]);
-        return $statement->fetchALL(PDO::FETCH_ASSOC);
+        $answer=$statement->fetchALL(PDO::FETCH_ASSOC);
+        $this->database->killPDO($this->database);
+        return $answer;
     }
     public function  getTable6( ){
         $statement = $this->database->getConnection()->query('SELECT table_1.name, table_1.ID,table_1.kt/table_1.sd as nagr
@@ -89,6 +100,8 @@ FROM(SELECT  task.title as name, task.ID as ID, COUNT( DISTINCT  task_inspector.
                     ON stud_task.ID_task=task_inspector.ID_task
      GROUP BY  task.ID) as table_1
 ');
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        $answer=$statement->fetchAll(PDO::FETCH_ASSOC);
+        $this->database->killPDO($this->database);
+        return $answer;
     }
 }

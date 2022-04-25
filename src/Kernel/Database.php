@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace App\Kernel;
 
 
 
@@ -13,6 +13,7 @@ class Database
     private \PDO $connection;
     public  function  __construct(string $dsn, string $usrname,string $password)
     {
+        $conn=null;
         try{
             $this->connection=new  \PDO($dsn,$usrname,$password);
         }catch (\PDOException $exception){
@@ -25,5 +26,9 @@ class Database
     public  function  getConnection():\PDO
     {
         return  $this->connection;
+    }
+    public  function  killPDO(&$conn){
+        $conn1=$conn;
+        $conn1=null;
     }
 }
