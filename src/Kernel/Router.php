@@ -56,8 +56,9 @@ class Router
             $ID=$post['stud_ID'];
             $getTable1 = json_encode($Table1->getTable1($ID));
 
-            echo  $getTable1;
-            exit(200);
+            header("Content-Type: application/json");
+            echo json_encode($getTable1);
+            exit;
         });
         $app->get('/table2',function ( $recuest, $response) use($twig){
             $body=$twig->render('table2.twig');
