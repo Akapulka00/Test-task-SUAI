@@ -15,7 +15,8 @@
         "ext-pdo": "*",
         "slim/psr7": "^1.5",
         "symfony/asset": "^6.0",
-        "dogancelik/slim-json": "^0.4.0"
+        "dogancelik/slim-json": "^0.4.0",
+      "ext-json": "*"
     },
     "autoload": {
         "psr-4": {

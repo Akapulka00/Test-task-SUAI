@@ -21,7 +21,7 @@ document.querySelector('.submit').addEventListener('click', function (e) {
                 });
                 console.log(data)
                 let tittle = document.createElement('h1');
-                tittle.innerText = "Список студентов по группам"
+                tittle.innerText = "Задания по коэфиценту нагруженности"
                 let container = document.querySelector('.tabble')
                 container.append(tittle)
                 let table = document.createElement('table');

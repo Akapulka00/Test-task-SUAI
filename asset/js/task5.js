@@ -21,7 +21,7 @@ document.forms.nagr.addEventListener('submit', function (e) {
                 });
                 console.log(data)
                 let tittle = document.createElement('h1');
-                tittle.innerText = "Список студентов по группам"
+                tittle.innerText = "Список заданий по нагруженности"
                 let container = document.querySelector('.tabble')
                 container.append(tittle)
                 let table = document.createElement('table');

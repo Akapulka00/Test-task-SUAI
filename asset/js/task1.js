@@ -1,4 +1,5 @@
 
+
 document.forms.idStudent.addEventListener('submit', function (e) {
     e.preventDefault();
     document.querySelector('.tabble').innerHTML=` `;
@@ -8,8 +9,7 @@ document.forms.idStudent.addEventListener('submit', function (e) {
     })
         .then(response => response.json())
         .then(data => {
-
-            if(data.length!=0) {
+            if(data.length!==0) {
                 let tittle = document.createElement('h1');
                 tittle.innerText = "Задания студента"
                 let container = document.querySelector('.tabble')
